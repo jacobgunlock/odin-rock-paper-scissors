@@ -1,11 +1,24 @@
 let selection;
-function getSelection() {
-    selection = prompt("rock paper scissors?").toUpperCase();
-    if (selection !== "ROCK" && selection !== "PAPER" && selection !== "SCISSORS" || selection == "") {
-        getSelection();
-    } 
-    console.log("You picked: " + selection);
-}
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissors = document.getElementById("scissors");
+
+rock.addEventListener('click', () => {
+    selection = "ROCK";
+    document.getElementById('userSelection').innerHTML = `You Chose: ${selection}`
+    getCompSelection();
+});
+paper.addEventListener('click', () => {
+    selection = "PAPER";
+    document.getElementById('userSelection').innerHTML = `You Chose: ${selection}`
+    getCompSelection();
+});
+scissors.addEventListener('click', () => {
+    selection = "SCISSORS";
+    document.getElementById('userSelection').innerHTML = `You Chose: ${selection}`
+    getCompSelection();
+});
+
 
 let compSelection;
 function getCompSelection(){
@@ -21,47 +34,43 @@ function getCompSelection(){
             compSelection = "SCISSORS"
             break;
     }
-    console.log("Computer picked: " + compSelection);
+    document.getElementById('compSelection').innerHTML = `The Computer Chose: ${compSelection}`
+    playRound(selection,compSelection);
 }
-
-let outcome;
 let userWins = 0;
 let compWins = 0;
-let rounds = 0;
+
 function playRound(selection, compSelection) {
-    if (selection == compSelection) {
-        outcome = ("Its a tie!")
-        return;
+    let outcome = document.getElementById('outcome');
+    //tie
+    if (selection === compSelection) {
+        outcome.innerHTML = "Its a tie!";
     }
+    //comp wins
     else if (selection == "ROCK" && compSelection == "PAPER"
     || selection == "PAPER" && compSelection == "SCISSORS"
     || selection == "SCISSORS" && compSelection == "ROCK") {
-        outcome = (`${compSelection} beats ${selection}. Computer wins!`)
+        outcome.innerHTML = `${compSelection} beats ${selection}. Computer wins!`
         compWins++;
-        rounds++;
-        return;
+        document.getElementById('compScore').innerHTML = `Computer Score: ${compWins}`;
+        checkWinner();
+    //user wins
     } else {
-        outcome = (`${selection} beats ${compSelection}. You win!`)
+        outcome.innerHTML = `${selection} beats ${compSelection}. You win!`
         userWins++;
-        rounds++;
-        return;
+        document.getElementById('userScore').innerHTML = "Your Score: " + userWins;
+        checkWinner();
     }
 }
-
-let winner;
-function game() {
-    while (rounds != 5) {
-        getSelection();
-        getCompSelection();
-        playRound(selection, compSelection);
-        console.log(outcome);
-    }
-    if (userWins > compWins) {
-        winner = ("You won!");
-    } else {
-        winner = ("Computer won!");
-    }
-    console.log(winner);
+function checkWinner(){
+    if (userWins === 5) {
+        document.getElementById('winner').innerHTML = 'You Won!'
+        alert("You Won!")
+    };
+    if (compWins === 5) {
+        document.getElementById('winner').innerHTML = 'Computer Won!'
+        alert("Computer Won!")
+    };
 }
 
-game();
+
