@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
     <h1>Rock Paper Scissors</h1>
-    <div>
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+    <div class="choices">
+        <button class="button" id="rock">Rock</button>
+        <button class="button" id="paper">Paper</button>
+        <button class="button" id="scissors">Scissors</button>
     </div>
-    <div>
-        <p id="userSelection">You Chose:</p>
-        <p id="compSelection">The Computer Chose:</p>
+    <div class="middle">
+        <div class="selections">
+            <p id="userSelection">You Chose: </p>
+            <p id="compSelection">Computer Chose:</p>
+        </div>
+        <div class="score">
+            <p id="userScore">Your Score: 0</p>
+            <p id="compScore">Computer Score: 0</p>
+        </div>
     </div>
-    <div>
-        <p id="userScore">Your Score: 0</p>
-        <p id="compScore">Computer Score: 0</p>
+    <p id="outcome"></p>
+    <div class="middle">
+        <p class="hidden" id="winner"> </p>
+        <button class="hidden" id="reset">Play Again?</button>
     </div>
-    <p id="outcome"> </p>
-    <p id="winner"> </p>
     
 </body>
 <script src="game.js"></script>
